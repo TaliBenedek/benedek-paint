@@ -17,4 +17,6 @@
                  onMouseReleased="#release"
                  width="500"
                  height="275"/>
+    <ColorPicker fx:id="colorPicker"
+    onAction="#changeColor"/>
 </AnchorPane>
