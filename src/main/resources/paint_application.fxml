@@ -7,16 +7,27 @@
 <?import javafx.scene.layout.*?>
 
 <?import benedek.paint.PaintCanvas?>
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="benedek.paint.PaintController"
+            fx:id="borderPane"
             prefHeight="400.0" prefWidth="600.0">
+    <top>
+        <ToolBar>
+        <HBox alignment="CENTER" spacing="5">
+            <ColorPicker fx:id="colorPicker"
+                            onAction="#changeColor"/>
+            <CheckBox fx:id="eraser" text="Eraser" />
+        </HBox>
+         </ToolBar>
+    </top>
+    <center>
     <PaintCanvas fx:id="paintCanvas"
                  onMousePressed="#press"
-                 onMouseDragged="#draw"
+                 onMouseDragged="#drag"
                  onMouseReleased="#release"
                  width="500"
                  height="275"/>
-    <ColorPicker fx:id="colorPicker"
-    onAction="#changeColor"/>
-</AnchorPane>
+    </center>
+
+</BorderPane>
