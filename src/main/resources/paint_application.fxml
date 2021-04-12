@@ -23,9 +23,9 @@
     </top>
     <center>
     <PaintCanvas fx:id="paintCanvas"
-                 onMousePressed="#press"
-                 onMouseDragged="#drag"
-                 onMouseReleased="#release"
+                 onMousePressed="#onMousePress"
+                 onMouseDragged="#onMouseDrag"
+                 onMouseReleased="#onMouseRelease"
                  width="500"
                  height="275"/>
     </center>

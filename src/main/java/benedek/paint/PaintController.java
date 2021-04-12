@@ -27,7 +27,7 @@ public class PaintController
         colorPicker.setValue(Color.BLACK);
     }
 
-    public void press(MouseEvent event)
+    public void onMousePress(MouseEvent event)
     {
         if(!eraser.isSelected())
         {
@@ -39,7 +39,7 @@ public class PaintController
         }
     }
 
-    public void drag(MouseEvent event)
+    public void onMouseDrag(MouseEvent event)
     {
         if(!eraser.isSelected())
         {
@@ -52,7 +52,7 @@ public class PaintController
     }
 
 
-    public void release(MouseEvent event)
+    public void onMouseRelease(MouseEvent event)
     {
         if(!eraser.isSelected())
         {
@@ -66,8 +66,6 @@ public class PaintController
 
     public void changeColor(ActionEvent event)
     {
-        GraphicsContext context = paintCanvas.getGraphicsContext2D();
-        context.setStroke(colorPicker.getValue());
+        paintCanvas.changeStroke(event, colorPicker);
     }
-
 }

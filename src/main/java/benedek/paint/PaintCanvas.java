@@ -1,7 +1,9 @@
 package benedek.paint;
 
+import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;
 
 
@@ -34,6 +36,11 @@ public class PaintCanvas extends Canvas
     public void erase(MouseEvent event)
     {
         context.clearRect(event.getX(), event.getY(), 5,5);
+    }
+
+    public void changeStroke(ActionEvent event, ColorPicker colorPicker)
+    {
+        context.setStroke(colorPicker.getValue());
     }
 
     @Override
