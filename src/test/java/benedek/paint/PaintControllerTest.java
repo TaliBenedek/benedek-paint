@@ -11,8 +11,7 @@ import javafx.scene.paint.Color;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class PaintControllerTest
 {
@@ -49,7 +48,7 @@ public class PaintControllerTest
         givenPaintController();
 
         //when
-        eraser.setSelected(true);
+        doReturn(true).when(eraser).isSelected();
         MouseEvent event = mock(MouseEvent.class);
         controller.onMousePress(event);
 
@@ -65,7 +64,7 @@ public class PaintControllerTest
         MouseEvent event = mock(MouseEvent.class);
 
         //when
-        eraser.setSelected(false);
+        doReturn(false).when(eraser).isSelected();
         controller.onMousePress(event);
 
         //then
@@ -80,7 +79,7 @@ public class PaintControllerTest
         MouseEvent event = mock(MouseEvent.class);
 
         //when
-        eraser.setSelected(true);
+        doReturn(true).when(eraser).isSelected();
         controller.onMouseDrag(event);
 
         //then
@@ -95,7 +94,7 @@ public class PaintControllerTest
         MouseEvent event = mock(MouseEvent.class);
 
         //when
-        eraser.setSelected(false);
+        doReturn(false).when(eraser).isSelected();
         controller.onMouseDrag(event);
 
         //then
@@ -110,7 +109,7 @@ public class PaintControllerTest
         MouseEvent event = mock(MouseEvent.class);
 
         //when
-        eraser.setSelected(true);
+        doReturn(true).when(eraser).isSelected();
         controller.onMouseRelease(event);
 
         //then
@@ -125,7 +124,7 @@ public class PaintControllerTest
         MouseEvent event = mock(MouseEvent.class);
 
         //when
-        eraser.setSelected(false);
+        doReturn(false).when(eraser).isSelected();
         controller.onMouseRelease(event);
 
         //then
