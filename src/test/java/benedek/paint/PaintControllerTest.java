@@ -1,3 +1,5 @@
+package benedek.paint;
+
 import benedek.paint.PaintCanvas;
 import benedek.paint.PaintController;
 import javafx.event.ActionEvent;
@@ -14,13 +16,13 @@ import static org.mockito.Mockito.verify;
 
 public class PaintControllerTest
 {
-    private PaintController controller;
+    PaintController controller;
     @FXML
-    private PaintCanvas canvas;
+    PaintCanvas paintCanvas;
     @FXML
-    private ColorPicker colorPicker;
+    ColorPicker colorPicker;
     @FXML
-    private CheckBox eraser;
+    CheckBox eraser;
 
     @BeforeClass
     public static void beforeClass() {
@@ -47,11 +49,12 @@ public class PaintControllerTest
         givenPaintController();
 
         //when
-        controller.onMousePress(mock(MouseEvent.class));
-        eraser.isSelected();
+        eraser.setSelected(true);
+        MouseEvent event = mock(MouseEvent.class);
+        controller.onMousePress(event);
 
         //then
-        verify(canvas).erase(mock(MouseEvent.class));
+        verify(paintCanvas).erase(event);
     }
 
     @Test
@@ -59,12 +62,14 @@ public class PaintControllerTest
     {
         //given
         givenPaintController();
+        MouseEvent event = mock(MouseEvent.class);
 
         //when
-        controller.onMousePress(mock(MouseEvent.class));
+        eraser.setSelected(false);
+        controller.onMousePress(event);
 
         //then
-        verify(canvas).startDraw(mock(MouseEvent.class));
+        verify(paintCanvas).startDraw(event);
     }
 
     @Test
@@ -72,12 +77,14 @@ public class PaintControllerTest
     {
         //given
         givenPaintController();
+        MouseEvent event = mock(MouseEvent.class);
 
         //when
-        controller.onMouseDrag(mock(MouseEvent.class));
+        eraser.setSelected(true);
+        controller.onMouseDrag(event);
 
         //then
-        verify(canvas).erase(mock(MouseEvent.class));
+        verify(paintCanvas).erase(event);
     }
 
     @Test
@@ -85,12 +92,14 @@ public class PaintControllerTest
     {
         //given
         givenPaintController();
+        MouseEvent event = mock(MouseEvent.class);
 
         //when
-        controller.onMouseDrag(mock(MouseEvent.class));
+        eraser.setSelected(false);
+        controller.onMouseDrag(event);
 
         //then
-        verify(canvas).duringDraw(mock(MouseEvent.class));
+        verify(paintCanvas).duringDraw(event);
     }
 
     @Test
@@ -98,12 +107,14 @@ public class PaintControllerTest
     {
         //given
         givenPaintController();
+        MouseEvent event = mock(MouseEvent.class);
 
         //when
-        controller.onMouseRelease(mock(MouseEvent.class));
+        eraser.setSelected(true);
+        controller.onMouseRelease(event);
 
         //then
-        verify(canvas).erase(mock(MouseEvent.class));
+        verify(paintCanvas).erase(event);
     }
 
     @Test
@@ -111,12 +122,14 @@ public class PaintControllerTest
     {
         //given
         givenPaintController();
+        MouseEvent event = mock(MouseEvent.class);
 
         //when
-        controller.onMouseRelease(mock(MouseEvent.class));
+        eraser.setSelected(false);
+        controller.onMouseRelease(event);
 
         //then
-        verify(canvas).endDraw(mock(MouseEvent.class));
+        verify(paintCanvas).endDraw(event);
     }
 
     @Test
@@ -124,19 +137,23 @@ public class PaintControllerTest
     {
         //given
         givenPaintController();
+        ActionEvent event = mock(ActionEvent.class);
 
         //when
-        controller.changeColor(mock(ActionEvent.class));
+        controller.changeColor(event);
 
         //then
-        verify(canvas).changeStroke(mock(ActionEvent.class), colorPicker);
+        verify(paintCanvas).changeStroke(event, colorPicker);
     }
 
     private void givenPaintController()
     {
-        canvas = mock(PaintCanvas.class);
+        paintCanvas = mock(PaintCanvas.class);
         colorPicker = mock(ColorPicker.class);
-        controller = new PaintController();
         eraser = mock(CheckBox.class);
+        controller = new PaintController();
+        controller.paintCanvas = paintCanvas;
+        controller.colorPicker = colorPicker;
+        controller.eraser = eraser;
     }
 }
