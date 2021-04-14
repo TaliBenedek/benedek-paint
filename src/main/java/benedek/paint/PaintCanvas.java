@@ -9,7 +9,12 @@ import javafx.scene.input.MouseEvent;
 
 public class PaintCanvas extends Canvas
 {
-    GraphicsContext context = getGraphicsContext2D();
+    private GraphicsContext context = getGraphicsContext2D();
+
+    /**
+     * Starts the drawing process after the mouse click
+     * @param event
+     */
     public void startDraw(MouseEvent event)
     {
         context.beginPath();
@@ -17,6 +22,10 @@ public class PaintCanvas extends Canvas
         context.stroke();
     }
 
+    /**
+     * Draws the line as the mouse is dragged over the PaintCanvas
+     * @param event
+     */
     public void duringDraw(MouseEvent event)
     {
         context.lineTo(event.getX(), event.getY());
@@ -26,6 +35,10 @@ public class PaintCanvas extends Canvas
         context.moveTo(event.getX(), event.getY());
     }
 
+    /**
+     * Finishes the drawing when the mouse is released
+     * @param event
+     */
     public void endDraw(MouseEvent event)
     {
         context.lineTo(event.getX(), event.getY());
@@ -33,11 +46,20 @@ public class PaintCanvas extends Canvas
         context.closePath();
     }
 
+    /**
+     * Erases strokes on the PaintCanvas
+     * @param event
+     */
     public void erase(MouseEvent event)
     {
         context.clearRect(event.getX(), event.getY(), 5,5);
     }
 
+    /**
+     * Changes the stroke color to the color selected in ColorPicker
+     * @param event
+     * @param colorPicker
+     */
     public void changeStroke(ActionEvent event, ColorPicker colorPicker)
     {
         context.setStroke(colorPicker.getValue());

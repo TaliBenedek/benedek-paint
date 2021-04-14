@@ -2,7 +2,6 @@ package benedek.paint;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;
@@ -27,6 +26,11 @@ public class PaintController
         colorPicker.setValue(Color.BLACK);
     }
 
+    /**
+     * Starts to draw the line when the mouse is pressed on the PaintCanvas
+     * or erases, depending on if eraser is checked
+     * @param event
+     */
     public void onMousePress(MouseEvent event)
     {
         if(!eraser.isSelected())
@@ -39,6 +43,11 @@ public class PaintController
         }
     }
 
+    /**
+     * Draws the line as the mouse is dragged over the PaintCanvas
+     * or erases, depending on if eraser is checked
+     * @param event
+     */
     public void onMouseDrag(MouseEvent event)
     {
         if(!eraser.isSelected())
@@ -51,7 +60,11 @@ public class PaintController
         }
     }
 
-
+    /**
+     * Finishes drawing the line as the mouse is released
+     * or erases, depending on if eraser is checked
+     * @param event
+     */
     public void onMouseRelease(MouseEvent event)
     {
         if(!eraser.isSelected())
@@ -64,6 +77,10 @@ public class PaintController
         }
     }
 
+    /**
+     * Changes the stroke color to the color the user selects from the ColorPicker
+     * @param event
+     */
     public void changeColor(ActionEvent event)
     {
         paintCanvas.changeStroke(event, colorPicker);
